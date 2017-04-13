@@ -1,6 +1,7 @@
 #!make
 
-.DEFAULT_GOAL=ansibles
+.DEFAULT_GOAL=play
+
 playbook ?= webservers
 
 ifeq ($(host),)
@@ -18,18 +19,20 @@ endif
 check.files: .vaultpass
 
 encrypt:
-	@ansible-vault encrypt $(file)\
-		--vault-password-file=.vaultpass
+	@ansible-vault encrypt\
+		--vault-password-file=.vaultpass\
+		$(shell find keys/* -type f)
 
 decrypt:
-	@ansible-vault decrypt $(file)\
-		--vault-password-file=.vaultpass
+	@ansible-vault decrypt\
+		--vault-password-file=.vaultpass\
+		$(shell find keys/* -type f)
 
 requirements:
 	@ansible-galaxy install -r requirements.yml
 
 play: check.files
-	@ansible-playbook -i $(host) $(playbook).yml $(options) \
+	@ansible-playbook -i $(host) $(playbook).yml $(options)\
 		--vault-password-file=.vaultpass
 
 .PHONY: check.files encrypt decrypt requirements play
