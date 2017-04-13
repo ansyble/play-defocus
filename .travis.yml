@@ -33,4 +33,4 @@ script:
   - ansible-playbook webservers.yml -i test --syntax-check
 
   # Play test
-  - ansible-playbook webservers.yml -i test
+  - ansible-playbook webservers.yml -i test --verbose
