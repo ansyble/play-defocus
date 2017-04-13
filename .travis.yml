@@ -12,7 +12,7 @@ addons:
 
 install:
   # Install ansible
-  - pip install ansible
+  - pip install ansible==2.2.2.0
 
   # Check ansible version
   - ansible --version
@@ -28,7 +28,6 @@ before_script:
 
 script:
   - ls -lR .
-  - env|sort
 
   # Syntax check
   - ansible-playbook webservers.yml -i test --syntax-check
