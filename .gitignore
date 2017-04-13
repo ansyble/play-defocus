@@ -14,7 +14,6 @@
 
 .vaultpass
 /lib
-/keys
 /*.retry
 
 sftp-config.json
