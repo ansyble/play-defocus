@@ -23,6 +23,9 @@ before_script:
   - mv tests/inventory test
   - mv tests/keys keys/test
 
+  # Requirements
+  - ansible-galaxy install -r requirements.yml
+
 script:
   # Syntax check
   - ansible-playbook webservers.yml -i test --syntax-check
