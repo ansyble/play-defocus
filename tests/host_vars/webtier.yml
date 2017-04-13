@@ -1,3 +1,4 @@
 ---
 # --- certboot
 certbot_auto_renew_user: test
+certbot_install_from_source: yes
