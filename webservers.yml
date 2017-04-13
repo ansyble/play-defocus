@@ -1,0 +1,54 @@
+---
+- name: playbook for webserver tier
+  hosts: webservers
+  become: true
+  vars_files:
+    - group_vars/firewall.yml
+    - group_vars/logrotate.yml
+    - group_vars/nginx.yml
+    - group_vars/proxy.yml
+    - group_vars/webtier.yml
+    - group_vars/zsh.yml
+    - "host_vars/{{ hostname }}/repos.yml"
+    - "host_vars/{{ hostname }}/users.yml"
+    - "keys/{{ hostname }}/rsa/github.yml"
+    - "keys/{{ hostname }}/ssl/crt.yml"
+    - "keys/{{ hostname }}/ssl/key.yml"
+    - "keys/{{ hostname }}/vpn.yml"
+
+  roles:
+    - role: apt
+    - role: hostname
+    - role: firewall
+    - role: logrotate
+    - role: users
+    - role: oh-my-zsh
+    - role: python
+    - role: oracle-java
+    - role: node
+    - role: docker
+    - role: certbot
+    - role: webtier
+
+- name: playbook for nginx
+  hosts: webservers
+  become: true
+  vars_files:
+    - group_vars/nginx.yml
+    - group_vars/proxy.yml
+
+  pre_tasks:
+    - shell: >
+        letsencrypt certonly
+          -d {{ hostname }}
+          -d drone.{{ hostname }}
+          -d docker.{{ hostname }}
+          -d api.{{ hostname }}
+          -d admin.{{ hostname }}
+          --rsa-key-size 4096
+          --email {{ email }}
+
+    - command: openssl dhparam -out /etc/nginx/snippets/dhparam.pem 4096
+
+  roles:
+    - role: nginx

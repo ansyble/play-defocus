@@ -1,0 +1,12 @@
+---
+- name: playbook for drone
+  hosts: drone
+  become: true
+  vars_files:
+    - group_vars/drone.yml
+    - group_vars/nginx.yml
+    - "keys/{{ hostname }}/drone.yml"
+
+  roles:
+    - role: drone
+    - role: nginx
