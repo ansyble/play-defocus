@@ -1,0 +1,9 @@
+---
+# --- hostname
+webtier_hostname: "{{ hostname }}"
+
+# --- vpn server
+webtier_vpn_config:
+  user: "{{ vpn_user }}"
+  psk: "{{ vpn_psk }}"
+  password: "{{ vpn_password }}"

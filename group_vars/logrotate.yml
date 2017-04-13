@@ -1,0 +1,21 @@
+---
+logrotate_scripts:
+  - name: nginx
+    path: /var/log/nginx/*.log
+    options:
+      - weekly
+      - size 25M
+      - missingok
+      - compress
+      - delaycompress
+      - copytruncate
+
+  - name: ulogd
+    path: /var/log/ulogd.*
+    options:
+      - weekly
+      - size 25M
+      - missingok
+      - compress
+      - delaycompress
+      - copytruncate
