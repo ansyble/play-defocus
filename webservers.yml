@@ -11,6 +11,7 @@
     - group_vars/zsh.yml
     - "host_vars/{{ hostname }}/repos.yml"
     - "host_vars/{{ hostname }}/users.yml"
+    - "host_vars/{{ hostname }}/webtier.yml"
     - "keys/{{ hostname }}/rsa/github.yml"
     - "keys/{{ hostname }}/vpn.yml"
 
@@ -27,14 +28,7 @@
     - role: certbot
     - role: webtier
 
-- name: playbook for nginx
-  hosts: webservers
-  become: true
-  vars_files:
-    - group_vars/nginx.yml
-    - group_vars/proxy.yml
-
-  pre_tasks:
+  post_tasks:
     # certificate
     - name: check cert exists
       stat:
@@ -53,6 +47,14 @@
           --email {{ certbot_email }}
       when: cert_exists.stat.exists == False 
 
+- name: playbook for nginx
+  hosts: webservers
+  become: true
+  vars_files:
+    - group_vars/nginx.yml
+    - group_vars/proxy.yml
+
+  pre_tasks:
     # dhparam
     - name: check dhparam exists
       stat:
