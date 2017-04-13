@@ -13,7 +13,6 @@
 *.xls
 
 .vaultpass
-/host_vars
 /lib
 /keys
 /*.retry

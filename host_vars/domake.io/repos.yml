@@ -1,0 +1,5 @@
+---
+webtier_repositories:
+  - url: git@github.com:mongkok/defocus
+    dest: /opt/apps/defocus
+    user: mongkok

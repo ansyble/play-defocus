@@ -1,0 +1,33 @@
+---
+# --- groups
+users_groups:
+  - name: devops
+
+# --- users
+users:
+  - name: mongkok
+    sudoer: yes
+    comment: I'd do anything to get you humans out of my forest! 
+    groups: ["devops"]
+    append: no
+    shell: /bin/zsh
+    home: /home/mongkok
+    system: yes
+    ssh_keys:
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQD+F1+rPxmGs5OM9RUxIp2wLLWWF+XV8FHAwKt9wja+wqWkpu/sjZgO0ZQlEy6I4+Uk4O6CbHq7/drFDS8+7jaLsJsJvb6KWFTTbfT7DCzBdipG4qvE5mW6mLuUI/6IJ97W/ZzYnTG5rm/rMqGAPIPX+j1bX1z2oUb9inOoV/fgjXZAMBc7CBsKcw9oe5qDhh8payLbeTX+0YymLiitZVIouAws/xz6EAgDO1qjgMcS5/rrhOStPRR61iMrjH3I9j5YWUMVfmemkNGfdTpscpjGkjukm3blZJTcWJ93gGknu+1FF4+QRyu4lLWEQ/kWoIz3/GYCrjI/GEkpqFVqPMhL7JZUxoaGnRQmCXoGV1JyxYLJU5PTFZSz1/VQr8ia37ZudGJxoCG73HQrMZ1+TxNCuXSBOo7y+5ez/0TpIKkCv8aOruvfx81LvIut/Fx+URBND9RnX0HhCpgp5V4MdsoGWApxlYa86mxdK0ux91jIdZJqJ8A4x4ZuV3Ky4mdhhcZOKrCh9FZOJRTD7fb01ldrrFso1bI6UhCGmr/n8RvX9NUzO5+myL/dlagLZBSXL6+9CLDOlAhC867utrifUnfjRSqIoSdjmanWLIgzcQaPXYSB3V/3O/0K1J2fhnRqB3anDH9GcNN2UmZOAiLhlv+Z+MwjY5583/3W7IjQzHIxxQ== mongkok@domake.io"
+
+    zshenv: |
+      export DEFOCUS_PROMPT='$(virtualenv_prompt_info)%{$fg_bold[red]%}c(: %{$fg_bold[yellow]%}(%n.%M) %{$fg_bold[red]%}㋡ ${ret_status}%{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}% %{$reset_color%}'
+      export DRONE_SERVER=https://drone.domake.io
+
+# --- ssh config
+users_ssh_config_hosts:
+  - user: mongkok
+    hosts:
+      - name: github.com
+        rsa_private: "{{ rsa_github }}"
+
+# --- oh-my-zsh
+oh_my_zsh_users:
+  - name: root
+  - name: mongkok
