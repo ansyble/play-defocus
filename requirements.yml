@@ -1,0 +1,32 @@
+---
+# Vendors
+- name: apt
+  src: ANXS.apt
+- name: certbot
+  src: geerlingguy.certbot
+- name: docker
+  src: https://github.com/angstwad/docker.ubuntu
+- name: logrotate
+  src: https://github.com/nickhammond/ansible-logrotate
+- name: newrelic
+  src: https://github.com/weareinteractive/ansible-newrelic
+- name: nginx
+  src: https://github.com/jdauphant/ansible-role-nginx
+- name: node
+  src: https://github.com/nodesource/ansible-nodejs-role
+- name: oracle-java
+  src: https://github.com/William-Yeh/ansible-oracle-java
+
+# me
+- name: drone
+  src: ansyble.drone
+- name: firewall
+  src: https://github.com/ansyble/role-firewall
+- name: oh-my-zsh
+  src: ansyble.oh-my-zsh
+- name: python
+  src: ansyble.python
+- name: users
+  src: ansyble.users
+- name: webtier
+  src: ansyble.webtier
