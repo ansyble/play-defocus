@@ -30,4 +30,6 @@ users_ssh_config_hosts:
 # --- oh-my-zsh
 oh_my_zsh_users:
   - name: root
+
   - name: mongkok
+    theme: ocarina
