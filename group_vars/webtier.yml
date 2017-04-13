@@ -10,4 +10,4 @@ webtier_vpn_config:
 
 # --- certbot
 certbot_domain: "{{ hostname }}"
-certbot_email: "{{ ansible@hostname }}"
+certbot_email: ansible@hostname 

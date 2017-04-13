@@ -45,7 +45,7 @@
           -d admin.{{ certbot_domain }}
           --rsa-key-size 4096
           --email {{ certbot_email }}
-      when: cert_exists.stat.exists == False 
+      when: cert_exists.stat.exists == False
 
 - name: playbook for nginx
   hosts: webservers
