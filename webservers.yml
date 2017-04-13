@@ -38,7 +38,14 @@
     - group_vars/proxy.yml
 
   pre_tasks:
-    - shell: >
+    # certificate
+    - name: check cert exists
+      stat:
+        path: "/etc/letsencrypt/live/{{ hostname }}"
+      register: cert_exists
+
+    - name: obtain cert
+      shell: >
         letsencrypt certonly
           -d {{ hostname }}
           -d drone.{{ hostname }}
@@ -47,8 +54,18 @@
           -d admin.{{ hostname }}
           --rsa-key-size 4096
           --email {{ email }}
+      when: cert_exists.stat.exists == False 
 
-    - command: openssl dhparam -out /etc/nginx/snippets/dhparam.pem 4096
+    # dhparam
+    - name: check dhparam exists
+      stat:
+        path: /etc/nginx/snippets/dhparam.pem
+      register: dhparam_exists
+
+    - name: openssl dhparam
+      command: openssl dhparam -out /etc/nginx/snippets/dhparam.pem 4096
+      async: 30
+      when: dhparam_exists.stat.exists == False 
 
   roles:
     - role: nginx
