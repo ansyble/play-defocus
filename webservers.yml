@@ -12,13 +12,10 @@
     - "host_vars/{{ hostname }}/repos.yml"
     - "host_vars/{{ hostname }}/users.yml"
     - "keys/{{ hostname }}/rsa/github.yml"
-    - "keys/{{ hostname }}/ssl/crt.yml"
-    - "keys/{{ hostname }}/ssl/key.yml"
     - "keys/{{ hostname }}/vpn.yml"
 
   roles:
     - role: apt
-    - role: hostname
     - role: firewall
     - role: logrotate
     - role: users
