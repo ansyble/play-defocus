@@ -37,13 +37,13 @@
 
     - name: obtain cert
       shell: >
-        letsencrypt certonly
-          -d {{ certbot_domain }}
-          -d drone.{{ certbot_domain }}
-          -d docker.{{ certbot_domain }}
-          -d api.{{ certbot_domain }}
-          -d admin.{{ certbot_domain }}
-          --rsa-key-size 4096
+        letsencrypt certonly\
+          -d {{ certbot_domain }}\
+          -d drone.{{ certbot_domain }}\
+          -d docker.{{ certbot_domain }}\
+          -d api.{{ certbot_domain }}\
+          -d admin.{{ certbot_domain }}\
+          --rsa-key-size 4096\
           --email {{ certbot_email }}
       when: cert_exists.stat.exists == False
 
