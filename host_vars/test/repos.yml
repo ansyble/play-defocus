@@ -1,0 +1,5 @@
+---
+webtier_repositories:
+  - url: https://github.com/ansyble/play-defocus
+    dest: /tmp/test
+    user: test

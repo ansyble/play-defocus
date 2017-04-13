@@ -1,0 +1,15 @@
+---
+# --- users
+users:
+  - name: test
+
+# --- ssh config
+users_ssh_config_hosts:
+  - user: test
+    hosts:
+      - name: github.com
+        rsa_private: "..."
+
+# --- oh-my-zsh
+oh_my_zsh_users:
+  - name: test
