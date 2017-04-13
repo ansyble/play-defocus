@@ -27,6 +27,9 @@ before_script:
   - ansible-galaxy install -r requirements.yml
 
 script:
+  - ls -lR .
+  - env|sort
+
   # Syntax check
   - ansible-playbook webservers.yml -i test --syntax-check
 
