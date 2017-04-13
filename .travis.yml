@@ -27,8 +27,6 @@ before_script:
   - ansible-galaxy install -r requirements.yml
 
 script:
-  - ls -lR .
-
   # Syntax check
   - ansible-playbook webservers.yml -i test --syntax-check
 
