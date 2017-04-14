@@ -1,7 +1,9 @@
 ---
 # --- certboot
-certbot_auto_renew_user: test
 certbot_install_from_source: yes
 
 # --- seagull
 webtier_seagull_deploy: no
+
+# --- nginx
+nginx_daemon_mode: off
