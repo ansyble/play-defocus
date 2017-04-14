@@ -12,7 +12,7 @@
     - "host_vars/{{ inventory_hostname }}/repos.yml"
     - "host_vars/{{ inventory_hostname }}/users.yml"
     - "host_vars/{{ inventory_hostname }}/webtier.yml"
-    - "keys/{{ inventory_hostname }}/rsa/github.yml"
+    - [ "keys/{{ inventory_hostname }}/rsa/github.yml", group_vars/default.yml ]
     - "keys/{{ inventory_hostname }}/vpn.yml"
 
   roles:
