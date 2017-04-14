@@ -6,4 +6,4 @@ certbot_install_from_source: yes
 webtier_seagull_deploy: no
 
 # --- nginx
-nginx_daemon_mode: 'off'
+nginx_sites: {}
