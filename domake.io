@@ -1,6 +1,5 @@
 [all:vars]
-ansible_ssh_host=me.root
-email=dani.pyc@gmail.com
+ansible_ssh_host=me
 
 [webservers]
 domake.io
