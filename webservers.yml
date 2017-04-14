@@ -32,20 +32,21 @@
     # certificate
     - name: check cert exists
       stat:
-        path: "/etc/letsencrypt/live/{{ hostname }}"
+        path: "/etc/letsencrypt/live/{{ certbot_domain }}"
       register: cert_exists
+      when: inventory_hostname != test
 
     - name: obtain cert
       shell: >
-        letsencrypt certonly\
-          -d {{ certbot_domain }}\
-          -d drone.{{ certbot_domain }}\
-          -d docker.{{ certbot_domain }}\
-          -d api.{{ certbot_domain }}\
-          -d admin.{{ certbot_domain }}\
-          --rsa-key-size 4096\
-          --email {{ certbot_email }}
-      when: cert_exists.stat.exists == False
+        letsencrypt certonly
+        -d {{ certbot_domain }}
+        -d drone.{{ certbot_domain }}
+        -d docker.{{ certbot_domain }}
+        -d api.{{ certbot_domain }}
+        -d admin.{{ certbot_domain }}
+        --rsa-key-size 4096
+        --email {{ certbot_email }}
+      when: inventory_hostname != test and cert_exists.stat.exists == False
 
 - name: playbook for nginx
   hosts: webservers
