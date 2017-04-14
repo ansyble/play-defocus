@@ -1,4 +1,7 @@
 ---
+# --- default domain
+domain_name: "{{ inventory_hostname }}"
+
 # --- inventory_hostname
 webtier_hostname: "{{ inventory_hostname }}"
 
@@ -9,5 +12,4 @@ webtier_vpn_config:
   password: "{{ vpn_password }}"
 
 # --- certbot
-certbot_domain: "{{ inventory_hostname }}"
 certbot_email: "ansible@{{ inventory_hostname }}" 
