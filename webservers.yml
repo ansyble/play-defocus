@@ -9,11 +9,11 @@
     - group_vars/proxy.yml
     - group_vars/webtier.yml
     - group_vars/zsh.yml
-    - "host_vars/{{ hostname }}/repos.yml"
-    - "host_vars/{{ hostname }}/users.yml"
-    - "host_vars/{{ hostname }}/webtier.yml"
-    - "keys/{{ hostname }}/rsa/github.yml"
-    - "keys/{{ hostname }}/vpn.yml"
+    - "host_vars/{{ inventory_hostname }}/repos.yml"
+    - "host_vars/{{ inventory_hostname }}/users.yml"
+    - "host_vars/{{ inventory_hostname }}/webtier.yml"
+    - "keys/{{ inventory_hostname }}/rsa/github.yml"
+    - "keys/{{ inventory_hostname }}/vpn.yml"
 
   roles:
     - role: apt
@@ -34,7 +34,7 @@
       stat:
         path: "/etc/letsencrypt/live/{{ certbot_domain }}"
       register: cert_exists
-      when: inventory_hostname != test
+      when: inventory_inventory_hostname != test
 
     - name: obtain cert
       shell: >
@@ -46,7 +46,7 @@
         -d admin.{{ certbot_domain }}
         --rsa-key-size 4096
         --email {{ certbot_email }}
-      when: inventory_hostname != test and cert_exists.stat.exists == False
+      when: inventory_inventory_hostname != test and cert_exists.stat.exists == False
 
 - name: playbook for nginx
   hosts: webservers

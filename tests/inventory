@@ -1,7 +1,6 @@
 [all:vars]
 ansible_connection=local
 email=test@test.test
-hostname=test
 
 [webservers]
 test

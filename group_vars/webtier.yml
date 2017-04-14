@@ -1,6 +1,6 @@
 ---
-# --- hostname
-webtier_hostname: "{{ hostname }}"
+# --- inventory_hostname
+webtier_hostname: "{{ inventory_hostname }}"
 
 # --- vpn server
 webtier_vpn_config:
@@ -9,5 +9,5 @@ webtier_vpn_config:
   password: "{{ vpn_password }}"
 
 # --- certbot
-certbot_domain: "{{ hostname }}"
-certbot_email: ansible@hostname 
+certbot_domain: "{{ inventory_hostname }}"
+certbot_email: "ansible@{{ inventory_hostname }}" 

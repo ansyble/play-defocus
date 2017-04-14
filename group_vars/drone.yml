@@ -5,8 +5,8 @@ drone_port: 8010
 nginx_sites:
   drone:
     - listen 443 http2
-    - "server_name drone.{{ hostname }}"
-    - "include /etc/nginx/snippets/ssl.{{ hostname }}.conf"
+    - "server_name drone.{{ inventory_hostname }}"
+    - "include /etc/nginx/snippets/ssl.{{ inventory_hostname }}.conf"
     - location / {
         proxy_set_header X-Forwarded-For $remote_addr;
         proxy_set_header X-Forwarded-Proto $scheme;
