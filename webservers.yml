@@ -55,6 +55,7 @@
     - group_vars/nginx.yml
     - group_vars/proxy.yml
     - group_vars/webtier.yml
+    - host_vars/webtier.yml
 
   pre_tasks:
     # dhparam
