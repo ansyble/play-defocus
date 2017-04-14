@@ -1,5 +1,7 @@
 # Play defocus
 
+[![Build Status](https://travis-ci.org/ansyble/play-defocus.svg?branch=master)](https://travis-ci.org/ansyble/play-defocus)
+
 * Download Ansible roles:
 
 ```sh
