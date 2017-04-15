@@ -4,3 +4,9 @@ certbot_install_from_source: yes
 
 # --- nginx
 nginx_sites: {}
+
+# --- vpn
+webtier_vpn_config:
+  user: test
+  psk: test
+  password: test

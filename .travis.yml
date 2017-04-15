@@ -11,6 +11,8 @@ before_install:
   - deactivate
 
 install:
+  - sudo apt-get install nginx-full
+
   # Install ansible
   - sudo pip install ansible==2.2.2.0
 
@@ -22,6 +24,9 @@ before_script:
   - mv tests/host_vars host_vars/test
   - mv tests/inventory test
   - mv tests/keys keys/test
+
+  # Allow readable tmp files
+  - printf 'allow_world_readable_tmpfiles=True' >> ansible.cfg
 
   # Requirements
   - ansible-galaxy install -r requirements.yml
