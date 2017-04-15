@@ -12,7 +12,7 @@ before_install:
   - sudo apt-get update -qq
 
 install:
-  - sudo apt-get install nginx-full
+  - sudo apt-get install nginx
 
   # Install ansible
   - sudo pip install ansible==2.2.2.0
