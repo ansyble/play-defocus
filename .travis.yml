@@ -10,9 +10,17 @@ addons:
     packages:
     - python-pip
 
+before_install:
+  - deactivate
+  - sudo apt-get update -qq
+  - sudo apt-get install -y docker-engine
+
 install:
+  # Install Python client for docker
+  - sudo pip install docker docker-compose
+
   # Install ansible
-  - pip install ansible==2.2.2.0
+  - sudo pip install ansible==2.2.2.0
 
   # Check ansible version
   - ansible --version
