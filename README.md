@@ -15,5 +15,5 @@ $ make requirements
 * Server orchestration:
 
 ```sh
-$ make play inventory=[dev] play=[webservers|drone] tags=tag1,tag2
+$ make play inventory=domake.io play=[webservers|drone] tags=tag1,tag2
 ```
