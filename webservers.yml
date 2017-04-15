@@ -17,6 +17,7 @@
 
   roles:
     - role: apt
+      tags: apt
     - role: firewall
     - role: logrotate
     - role: users
@@ -25,6 +26,7 @@
     - role: oracle-java
     - role: node
     - role: docker
+      tags: docker
     - role: certbot
     - role: webtier
 
