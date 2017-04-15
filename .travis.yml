@@ -31,4 +31,4 @@ script:
   - ansible-playbook webservers.yml -i test --syntax-check
 
   # Play test
-  - ansible-playbook webservers.yml -i test --sudo --tags=apt,docker,webtier-seagull,nginx
+  - ansible-playbook webservers.yml -i test --sudo --skip-tags=firewall
