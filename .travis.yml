@@ -12,6 +12,7 @@ before_install:
   - sudo apt-get update -qq
 
 install:
+  # Fix unmet dependencies
   - sudo apt-get install nginx
 
   # Install ansible
