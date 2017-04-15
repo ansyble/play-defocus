@@ -9,6 +9,7 @@ addons:
 
 before_install:
   - deactivate
+  - sudo apt-get update -qq
 
 install:
   - sudo apt-get install nginx-full
@@ -24,9 +25,6 @@ before_script:
   - mv tests/host_vars host_vars/test
   - mv tests/inventory test
   - mv tests/keys keys/test
-
-  # Allow readable tmp files
-  - printf 'allow_world_readable_tmpfiles=True' >> ansible.cfg
 
   # Requirements
   - ansible-galaxy install -r requirements.yml
