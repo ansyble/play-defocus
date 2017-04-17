@@ -23,3 +23,8 @@ nginx_configs:
     - gzip_types text/plain text/css text/xml text/csv text/javascript application/x-javascript application/xml application/xml+rss application/javascript application/postscript application/pdf application/ecmascript application/json image/svg+xml
     - gzip_min_length 1000
     - gzip_disable "MSIE [1-6]\."
+
+  "{{ inventory_hostname }}":
+    - upstream domake.io {
+        server 127.0.0.1:5000 fail_timeout=0;
+      }
