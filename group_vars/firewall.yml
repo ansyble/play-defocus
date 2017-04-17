@@ -1,7 +1,10 @@
 ---
-# 500, 4500 ipsec
-firewall_allowed_tcp_ports: [22, 80, 443, 500, 4500]
-firewall_allowed_udp_ports: [ 500, 4500 ]
+# Allow only VPN (-i ppp0) and docker network (-i docker0)
+# iptables -I FORWARD -p tcp -i eth0 --dport 5432 -j DROP
+
+# 500 VPN l2tp
+firewall_allowed_tcp_ports: [22, 80, 443, 500]
+firewall_allowed_udp_ports: [ 500 ]
 firewall_additional_rules: []
 firewall_additional_log_rules:
   - 'iptables -A INPUT ! -i lo -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -m state --state NEW -j NFLOG --nflog-prefix  "[new]" --nflog-group 0'
