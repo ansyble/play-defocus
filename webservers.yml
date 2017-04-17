@@ -41,6 +41,7 @@
       shell: >
         letsencrypt certonly
         -d {{ domain_name }}
+        -d logs.{{ domain_name }}
         -d drone.{{ domain_name }}
         -d docker.{{ domain_name }}
         -d api.{{ domain_name }}
