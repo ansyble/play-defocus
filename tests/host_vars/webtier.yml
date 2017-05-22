@@ -10,3 +10,10 @@ webtier_vpn_config:
   user: test
   psk: test
   password: test
+
+# --- packages
+webtier_packages:
+  - g++
+
+webtier_utilities_extras:
+  - netcat
