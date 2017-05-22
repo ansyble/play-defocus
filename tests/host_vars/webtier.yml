@@ -1,4 +1,6 @@
 ---
+remote_user: root
+
 # --- certboot
 certbot_install_from_source: yes
 
