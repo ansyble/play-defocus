@@ -46,6 +46,7 @@
         -d docker.{{ domain_name }}
         -d api.{{ domain_name }}
         -d admin.{{ domain_name }}
+        -d docs.{{ domain_name }}
         --rsa-key-size 4096
         --email {{ certbot_email }}
       when: inventory_hostname != 'test' and cert_exists.stat.exists == False
