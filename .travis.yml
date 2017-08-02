@@ -17,7 +17,7 @@ install:
   - sudo apt-get install nginx
 
   # Install ansible
-  - sudo pip install git+git://github.com/ansible/ansible.git@v2.2.3.0-1
+  - sudo pip install ansible
 
   # Check ansible version
   - ansible --version
