@@ -23,7 +23,7 @@
     - role: users
     - role: oh-my-zsh
     - role: python
-    - role: oracle-java
+    # - role: oracle-java
     - role: node
     - role: docker
     - role: certbot
