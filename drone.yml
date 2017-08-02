@@ -5,6 +5,7 @@
   vars_files:
     - group_vars/drone.yml
     - group_vars/nginx.yml
+    - group_vars/webtier.yml
     - "keys/{{ inventory_hostname }}/drone.yml"
 
   roles:

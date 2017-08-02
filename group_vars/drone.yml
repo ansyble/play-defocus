@@ -1,6 +1,7 @@
 ---
 drone_ip_addr: 127.0.0.1
 drone_port: 8010
+drone_host: "https://drone.{{ domain_name }}"
 
 nginx_sites:
   drone:
