@@ -1,51 +1,4 @@
 ---
-nginx_auth_basic_files:
-  "{{ inventory_hostname }}":
-    - mongkok:$apr1$o9N1V11x$oeNkhyHHSpYA5jomb.kf51
-
-nginx_sites:
-  redirects:
-    - listen 80 default_server
-    - listen [::]:80 default_server
-    - server_name _
-    - return 301 https://$host$request_uri
-
-  docker.{{ inventory_hostname }}:
-    - listen 443 http2
-    - "server_name docker.{{ domain_name }}"
-    - "include /etc/nginx/snippets/ssl.{{ inventory_hostname }}.conf"
-    - "include /etc/nginx/snippets/auth_{{ inventory_hostname }}.conf"
-    - location / {
-        include /etc/nginx/snippets/proxy_headers.conf;
-        proxy_pass http://127.0.0.1:10086;
-      }
-
-  "{{ inventory_hostname }}":
-    - listen 443 http2
-    - client_max_body_size 4G
-    - server_name {{ inventory_hostname }} api.{{ inventory_hostname }} admin.{{ inventory_hostname }}
-    - "include /etc/nginx/snippets/ssl.{{ inventory_hostname }}.conf"
-    - keepalive_timeout 5
-    - location /static {
-        alias /opt/apps/defocus/defocus/static;
-        expires 7d;
-      }
-    - location /media {
-        alias /opt/apps/defocus/defocus/media;
-        expires 7d;
-      }
-    - location / {
-        try_files $uri @proxy_to_app;
-      }
-    - location @proxy_to_app {
-        include /etc/nginx/snippets/proxy_pass.conf;
-        proxy_pass http://{{ inventory_hostname }};
-      }
-    - error_page 500 502 503 504 /500.html
-    - location = /500.html {
-        root /opt/apps/defocus/defocus/templates;
-      }
-
 nginx_snippets:
   ssl:
     - 'ssl on'
@@ -66,9 +19,9 @@ nginx_snippets:
     - 'ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:ECDHE-RSA-AES128-GCM-SHA256:AES256+EECDH:DHE-RSA-AES128-GCM-SHA256:AES256+EDH:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:DES-CBC3-SHA:HIGH:!aNULL:!eNULL:!EXPORT:!DES:!MD5:!PSK:!RC4"'
     
   ssl.{{ inventory_hostname }}:
-    - "ssl_certificate /etc/letsencrypt/live/{{ domain_name }}/fullchain.pem"
-    - "ssl_certificate_key /etc/letsencrypt/live/{{ domain_name }}/privkey.pem"
-    - "ssl_trusted_certificate /etc/letsencrypt/live/{{ domain_name }}/chain.pem"
+    - "ssl_certificate /etc/letsencrypt/live/{{ ssl_domain_name|default(domain_name) }}/fullchain.pem"
+    - "ssl_certificate_key /etc/letsencrypt/live/{{ ssl_domain_name|default(domain_name) }}/privkey.pem"
+    - "ssl_trusted_certificate /etc/letsencrypt/live/{{ ssl_domain_name|default(domain_name) }}/chain.pem"
     - include /etc/nginx/snippets/ssl.conf
 
   proxy_headers:
