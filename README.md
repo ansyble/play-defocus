@@ -20,5 +20,5 @@ Please use `make <target>' where <target> is one of
 * Server orchestration:
 
 ```sh
-$ make play inventory=domake.io playbook=[webservers|drone] tags=tag1,tag2
+$ make play host=domake.io playbook=[webservers|drone] tags=tag1,tag2
 ```
