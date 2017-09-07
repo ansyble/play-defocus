@@ -2,3 +2,12 @@
 # --- certboot
 certbot_auto_renew_user: mongkok
 certbot_email: dani.pyc@gmail.com
+
+cert_domains:
+  - "{{ domain_name }}"
+  - "logs.{{ domain_name }}"
+  - "drone.{{ domain_name }}"
+  - "docker.{{ domain_name }}"
+  - "api.{{ domain_name }}"
+  - "admin.{{ domain_name }}"
+  - "docs.{{ domain_name }}"

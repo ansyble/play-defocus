@@ -23,13 +23,38 @@
     - role: users
     - role: oh-my-zsh
     - role: python
-    # - role: oracle-java
+    - role: oracle-java
     - role: node
     - role: docker
     - role: certbot
     - role: webtier
 
+
+- name: playbook for nginx
+  hosts: webservers
+  become: true
+  vars_files:
+    - group_vars/nginx.yml
+    - group_vars/proxy.yml
+    - group_vars/webtier.yml
+    - "host_vars/{{ inventory_hostname }}/nginx.yml"
+    - "host_vars/{{ inventory_hostname }}/webtier.yml"
+
+  roles:
+    - role: nginx
+
   post_tasks:
+    # dhparam
+    - name: check dhparam exists
+      stat:
+        path: /etc/nginx/snippets/dhparam.pem
+      register: dhparam_exists
+
+    - name: openssl dhparam
+      command: openssl dhparam -out /etc/nginx/snippets/dhparam.pem 4096
+      async: 3000
+      when: dhparam_exists.stat.exists == False 
+
     # certificate
     - name: check cert exists
       stat:
@@ -39,38 +64,10 @@
 
     - name: obtain cert
       shell: >
-        letsencrypt certonly
-        -d {{ domain_name }}
-        -d logs.{{ domain_name }}
-        -d drone.{{ domain_name }}
-        -d docker.{{ domain_name }}
-        -d api.{{ domain_name }}
-        -d admin.{{ domain_name }}
-        -d docs.{{ domain_name }}
+        letsencrypt certonly 
+        -n -d {{ cert_domains|join(' -d ') }}
+        --standalone
+        --agree-tos
         --rsa-key-size 4096
         --email {{ certbot_email }}
       when: inventory_hostname != 'test' and cert_exists.stat.exists == False
-
-- name: playbook for nginx
-  hosts: webservers
-  become: true
-  vars_files:
-    - group_vars/nginx.yml
-    - group_vars/proxy.yml
-    - group_vars/webtier.yml
-    - "host_vars/{{ inventory_hostname }}/webtier.yml"
-
-  pre_tasks:
-    # dhparam
-    - name: check dhparam exists
-      stat:
-        path: /etc/nginx/snippets/dhparam.pem
-      register: dhparam_exists
-
-    - name: openssl dhparam
-      command: openssl dhparam -out /etc/nginx/snippets/dhparam.pem 4096
-      async: 30
-      when: dhparam_exists.stat.exists == False 
-
-  roles:
-    - role: nginx
