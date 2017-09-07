@@ -25,6 +25,6 @@ nginx_configs:
     - gzip_disable "MSIE [1-6]\."
 
   "{{ inventory_hostname }}":
-    - upstream domake.io {
+    - upstream {{ inventory_hostname }} {
         server 127.0.0.1:5000 fail_timeout=0;
       }
