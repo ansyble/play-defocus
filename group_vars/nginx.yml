@@ -1,5 +1,8 @@
 ---
 nginx_http_params:
+  - sendfile on
+  - access_log /var/log/nginx/access.log
+  - error_log /var/log/nginx/error.log
   - client_max_body_size 50M
 
 nginx_pkgs:
@@ -9,10 +12,11 @@ nginx_pkgs:
 
 nginx_configs:
   secure:
-    - add_header X-Frame-Options SAMEORIGIN
-    - add_header X-Content-Type-Options nosniff
-    - add_header X-XSS-Protection "1; mode=block"
-    - 'more_set_headers "Server: {{ inventory_hostname }}"'
+    - |
+    add_header X-Frame-Options SAMEORIGIN;
+    add_header X-Content-Type-Options nosniff;
+    add_header X-XSS-Protection "1; mode=block";
+    more_set_headers "Server: {{ inventory_hostname }}";
 
   compress:
     - gzip on
