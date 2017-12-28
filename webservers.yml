@@ -19,7 +19,7 @@
     - name: Update and upgrade apt packages
       become: true
       apt:
-        upgrade: yes
+        upgrade: "{{ inventory_hostname != 'test' }}"
         update_cache: yes
         cache_valid_time: 86400
 
