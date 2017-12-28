@@ -6,3 +6,6 @@ test
 
 [drone]
 test
+
+[supervisor]
+test
