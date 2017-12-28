@@ -1,10 +1,13 @@
 ---
-# Vendors
+# vendors
 - name: certbot
   src: geerlingguy.certbot
 
 - name: docker
   src: https://github.com/angstwad/docker.ubuntu
+
+- name: firewall
+  src: https://github.com/geerlingguy/ansible-role-firewall
 
 - name: logrotate
   src: https://github.com/nickhammond/ansible-logrotate
@@ -18,9 +21,6 @@
 # me
 - name: drone
   src: ansyble.drone
-
-- name: firewall
-  src: https://github.com/ansyble/role-firewall
 
 - name: oh-my-zsh
   src: ansyble.oh-my-zsh
