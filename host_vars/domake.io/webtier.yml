@@ -11,3 +11,4 @@ cert_domains:
   - "api.{{ domain_name }}"
   - "admin.{{ domain_name }}"
   - "docs.{{ domain_name }}"
+  - "graphql.{{ domain_name }}"
