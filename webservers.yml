@@ -71,6 +71,7 @@
     - name: openssl dhparam
       command: openssl dhparam -out /etc/ssl/dhparam.pem 4096
       async: 3000
+      poll: 0
       when: dhparam_exists.stat.exists == False 
 
   roles:
