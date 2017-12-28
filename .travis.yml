@@ -29,4 +29,4 @@ script:
   - ansible-playbook webservers.yml -i test --syntax-check
 
   # Play test
-  - ansible-playbook webservers.yml -i test --sudo --skip-tags=firewall
+  - ansible-playbook webservers.yml -i test --become --skip-tags=firewall
