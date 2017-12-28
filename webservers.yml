@@ -15,16 +15,20 @@
     - [ "keys/{{ inventory_hostname }}/rsa/github.yml", group_vars/default.yml ]
     - "keys/{{ inventory_hostname }}/vpn.yml"
 
+  pre_tasks:
+    - name: Update and upgrade apt packages
+      become: true
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 86400
+
   roles:
-    - role: apt
     - role: firewall
-      tags: firewall
     - role: logrotate
     - role: users
     - role: oh-my-zsh
     - role: python
-    - role: oracle-java
-    - role: node
     - role: docker
     - role: certbot
     - role: webtier
@@ -40,27 +44,13 @@
     - "host_vars/{{ inventory_hostname }}/nginx.yml"
     - "host_vars/{{ inventory_hostname }}/webtier.yml"
 
-  roles:
-    - role: nginx
-
-  post_tasks:
-    # dhparam
-    - name: check dhparam exists
-      stat:
-        path: /etc/nginx/snippets/dhparam.pem
-      register: dhparam_exists
-
-    - name: openssl dhparam
-      command: openssl dhparam -out /etc/nginx/snippets/dhparam.pem 4096
-      async: 3000
-      when: dhparam_exists.stat.exists == False 
-
+  pre_tasks:
     # certificate
     - name: check cert exists
       stat:
         path: "/etc/letsencrypt/live/{{ domain_name }}"
       register: cert_exists
-      when: inventory_hostname != 'test'
+      when: cert_domains is defined
 
     - name: obtain cert
       shell: >
@@ -70,4 +60,18 @@
         --agree-tos
         --rsa-key-size 4096
         --email {{ certbot_email }}
-      when: inventory_hostname != 'test' and cert_exists.stat.exists == False
+      when: cert_domains is defined and cert_exists.stat.exists == False
+
+    # dhparam
+    - name: check dhparam exists
+      stat:
+        path: /etc/ssl/dhparam.pem
+      register: dhparam_exists
+
+    - name: openssl dhparam
+      command: openssl dhparam -out /etc/ssl/dhparam.pem 4096
+      async: 3000
+      when: dhparam_exists.stat.exists == False 
+
+  roles:
+    - role: nginx
