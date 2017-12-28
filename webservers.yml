@@ -41,7 +41,7 @@
     - group_vars/nginx.yml
     - group_vars/proxy.yml
     - group_vars/webtier.yml
-    - "host_vars/{{ inventory_hostname }}/nginx.yml"
+    - [ "host_vars/{{ inventory_hostname }}/nginx.yml", group_vars/default.yml ]
     - "host_vars/{{ inventory_hostname }}/webtier.yml"
 
   pre_tasks:
