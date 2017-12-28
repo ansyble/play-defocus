@@ -10,7 +10,7 @@
 
 ```sh
 $ make help
-Please use `make <target>' where <target> is one of
+Please use 'make <target>' where <target> is one of
   encrypt       Encrypting unencrypted keys
   decrypt       Decrypting encrypted keys
   install       Install roles dependencies
