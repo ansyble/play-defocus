@@ -1,0 +1,9 @@
+---
+- name: playbook for supervisor
+  hosts: supervisor
+  become: true
+  vars_files:
+    - "host_vars/{{ inventory_hostname }}/supervisor.yml"
+
+  roles:
+    - role: supervisor
